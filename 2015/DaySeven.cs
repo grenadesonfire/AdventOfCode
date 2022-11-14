@@ -31,7 +31,12 @@ namespace AdventOfCode._2015
 
         public int SolvePart2()
         {
-            throw new NotImplementedException();
+            var vm = new LogicMachine(_instructions);
+            var rest = vm.Execute("a");
+
+            vm.OverWriteWire("b", rest);
+            vm.ClearCache();
+            return vm.Execute("a");
         }
 
         private class LogicMachine
@@ -86,6 +91,18 @@ namespace AdventOfCode._2015
                 var ret = Execute(arg);
                 _cache.Add(arg, ret);
                 return ret;
+            }
+
+            internal void OverWriteWire(string label, ushort result)
+            {
+                var instr = _instructions.First(i => i.ResultLocation == label);
+                instr.Type = InstructionType.Assignment;
+                instr.Arg1 = $"{result}";
+            }
+
+            internal void ClearCache()
+            {
+                _cache.Clear();
             }
         }
 
