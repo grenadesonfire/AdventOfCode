@@ -14,11 +14,11 @@ namespace AdventOfCode._2015
     /// </summary>
     public class DaySix : ISolveable
     {
-        private string[] _commands;
+        private List<LightCommand> _commands;
 
         public DaySix(string[] commands)
         {
-            _commands = commands;
+            _commands = commands.Select(c => new LightCommand(c)).ToList(); ;
         }
 
         public int SolvePart1()
@@ -30,7 +30,55 @@ namespace AdventOfCode._2015
 
         public int SolvePart2()
         {
-            throw new NotImplementedException();
+            var grid = new LightGridV2(_commands);
+            grid.RunCommands();
+            return grid.Brightness;
+        }
+
+        private class LightGridV2 
+        {
+            private List<LightCommand> _commands;
+            private int[,] _grid;
+            public int Brightness { get; set; } = 0;
+
+            public LightGridV2(List<LightCommand> commands)
+            {
+                _commands = commands;
+                _grid = new int[1000, 1000];
+            }
+
+            public void RunCommands()
+            {
+                foreach (var cmd in _commands)
+                {
+                    Execute(cmd);
+                }
+            }
+
+            private void Execute(LightCommand cmd)
+            {
+                for (var yIdx = cmd.Top.Y; yIdx <= cmd.Bottom.Y; yIdx++)
+                {
+                    for (var xIdx = cmd.Top.X; xIdx <= cmd.Bottom.X; xIdx++)
+                    {
+                        switch (cmd.Instruction)
+                        {
+                            case LightCommandInst.OFF:
+                                if (_grid[yIdx, xIdx] > 0) Brightness--;
+                                _grid[yIdx, xIdx] = Math.Max(0, _grid[yIdx, xIdx]-1);
+                                break;
+                            case LightCommandInst.ON:
+                                Brightness += 1;
+                                _grid[yIdx, xIdx]++;
+                                break;
+                            case LightCommandInst.TOGGLE:
+                                _grid[yIdx, xIdx]+=2;
+                                Brightness += 2;
+                                break;
+                        }
+                    }
+                }
+            }
         }
 
         private class LightGrid
@@ -39,9 +87,9 @@ namespace AdventOfCode._2015
             private bool[,] _grid;
             public int On { get; set; } = 0;
 
-            public LightGrid(string[] commands)
+            public LightGrid(List<LightCommand> commands)
             {
-                _commands = commands.Select(c => new LightCommand(c)).ToList();
+                _commands = commands;
                 _grid = new bool[1000, 1000];
             }
 
@@ -77,43 +125,42 @@ namespace AdventOfCode._2015
                     }
                 }
             }
+        }
+        private enum LightCommandInst
+        {
+            ON,
+            OFF,
+            TOGGLE
+        }
 
-            private enum LightCommandInst
+        private class LightCommand
+        {
+            public LightCommandInst Instruction { get; set; }
+            public Point Top { get; set; }
+            public Point Bottom { get; set; }
+
+            public LightCommand(string c)
             {
-                ON,
-                OFF,
-                TOGGLE
+                var parts = c.Split(' ');
+
+                if (parts.Length == 5)
+                {
+                    Instruction = parts[1] == "on" ? LightCommandInst.ON : LightCommandInst.OFF;
+                    Top = StrToPoint(parts[2]);
+                    Bottom = StrToPoint(parts[4]);
+                }
+                else
+                {
+                    Instruction = LightCommandInst.TOGGLE;
+                    Top = StrToPoint(parts[1]);
+                    Bottom = StrToPoint(parts[3]);
+                }
             }
 
-            private class LightCommand
+            private Point StrToPoint(string v)
             {
-                public LightCommandInst Instruction { get; set; }
-                public Point Top { get; set; }
-                public Point Bottom { get; set; }
-
-                public LightCommand(string c)
-                {
-                    var parts = c.Split(' ');
-
-                    if(parts.Length == 5)
-                    {
-                        Instruction = parts[1] == "on" ? LightCommandInst.ON : LightCommandInst.OFF;
-                        Top = StrToPoint(parts[2]);
-                        Bottom = StrToPoint(parts[4]);
-                    }
-                    else
-                    {
-                        Instruction = LightCommandInst.TOGGLE;
-                        Top = StrToPoint(parts[1]);
-                        Bottom = StrToPoint(parts[3]);
-                    }
-                }
-
-                private Point StrToPoint(string v)
-                {
-                    var nums = v.Split(',');
-                    return new Point(int.Parse(nums[0]), int.Parse(nums[1]));
-                }
+                var nums = v.Split(',');
+                return new Point(int.Parse(nums[0]), int.Parse(nums[1]));
             }
         }
     }
