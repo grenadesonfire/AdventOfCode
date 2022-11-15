@@ -21,10 +21,60 @@ namespace AdventOfCode._2015
 
         public int SolvePart1()
         {
-            return StartDFS();
+            return StartDFS_Min();
         }
 
-        private int StartDFS()
+        public int SolvePart2()
+        {
+            return StartDFS_Max();
+        }
+
+        private int StartDFS_Max()
+        {
+            var max = int.MinValue;
+
+            foreach (var place in _locations)
+            {
+                var visited = new List<string> { place };
+
+                var minRoute = DFS_Max(visited, place);
+
+                if (minRoute > max) max = minRoute;
+            }
+
+            return max;
+        }
+
+        private int DFS_Max(List<string> visited, string currentlyAt)
+        {
+            var left = _locations.Where(l => !visited.Contains(l));
+
+            if (left.Count() == 0) return 0;
+
+            var max = int.MinValue;
+            var best = string.Empty;
+
+            foreach (var place in left)
+            {
+                //Create the new list so we don't mess up other branches
+                // could also use a queue or stack but ehhh.
+                var newVisit = visited.ToList();
+                newVisit.Add(place);
+
+                var dist = LookupDistance(currentlyAt, place) + DFS_Max(newVisit, place);
+
+                if (dist > max)
+                {
+                    max = dist;
+                    best = place;
+                }
+            }
+
+            return max;
+        }
+
+
+        private int StartDFS_Min()
         {
             var min = int.MaxValue;
 
@@ -32,7 +82,7 @@ namespace AdventOfCode._2015
             {
                 var visited = new List<string> { place };
 
-                var minRoute = DFS(visited, place);
+                var minRoute = DFS_Min(visited, place);
 
                 if (minRoute < min) min = minRoute;
             }
@@ -40,7 +90,7 @@ namespace AdventOfCode._2015
             return min;
         }
 
-        private int DFS(List<string> visited, string currentlyAt)
+        private int DFS_Min(List<string> visited, string currentlyAt)
         {
             var left = _locations.Where(l => !visited.Contains(l));
 
@@ -56,7 +106,7 @@ namespace AdventOfCode._2015
                 var newVisit = visited.ToList();
                 newVisit.Add(place);
 
-                var dist = DFS(newVisit, place);
+                var dist = LookupDistance(currentlyAt, place) + DFS_Min(newVisit, place);
 
                 if(dist < min)
                 {
@@ -65,22 +115,20 @@ namespace AdventOfCode._2015
                 }
             }
 
-            return min + LookupDistance(currentlyAt, best);
+            return min;
         }
 
         private int LookupDistance(string currentlyAt, string place)
         {
+            if (string.IsNullOrEmpty(currentlyAt) || string.IsNullOrEmpty(place)) return 0;
             return _routes
-                .FirstOrDefault(s =>
+                .First(s =>
                     (s.Location1 == currentlyAt || s.Location1 == place) &&
                     (s.Location2 == currentlyAt || s.Location2 == place))
                 .Distance;
         }
 
-        public int SolvePart2()
-        {
-            throw new NotImplementedException();
-        }
+        
 
         private class Route
         {
