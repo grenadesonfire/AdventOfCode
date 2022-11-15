@@ -1,6 +1,6 @@
 
-bin/
-
-obj/
-
 .vs/
+
+AdventOfCode.Tests/bin/
+
+AdventOfCode.Tests/obj/
