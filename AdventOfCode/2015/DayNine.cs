@@ -128,7 +128,15 @@ namespace AdventOfCode._2015
                 .Distance;
         }
 
-        
+        public string SolvePart1_Str()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string SolvePart2_Str()
+        {
+            throw new NotImplementedException();
+        }
 
         private class Route
         {

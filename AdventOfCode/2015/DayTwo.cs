@@ -20,9 +20,19 @@ namespace AdventOfCode._2015
             return _presents.Sum(p => p.PaperNeeded());
         }
 
+        public string SolvePart1_Str()
+        {
+            throw new NotImplementedException();
+        }
+
         public int SolvePart2()
         {
             return _presents.Sum(p => p.RibbonNeeded());
+        }
+
+        public string SolvePart2_Str()
+        {
+            throw new NotImplementedException();
         }
 
         private class Present

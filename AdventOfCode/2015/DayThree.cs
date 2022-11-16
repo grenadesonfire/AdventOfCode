@@ -20,10 +20,20 @@ namespace AdventOfCode._2015
             return _dirs.UniqueHouses;
         }
 
+        public string SolvePart1_Str()
+        {
+            throw new NotImplementedException();
+        }
+
         public int SolvePart2()
         {
             _dirs.SplitNavigate();
             return _dirs.UniqueHouses;
+        }
+
+        public string SolvePart2_Str()
+        {
+            throw new NotImplementedException();
         }
 
         private class Directions

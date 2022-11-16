@@ -35,6 +35,16 @@ namespace AdventOfCode._2015
             return grid.Brightness;
         }
 
+        public string SolvePart1_Str()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string SolvePart2_Str()
+        {
+            throw new NotImplementedException();
+        }
+
         private class LightGridV2 
         {
             private List<LightCommand> _commands;

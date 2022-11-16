@@ -32,6 +32,11 @@ namespace AdventOfCode._2015
             return -1;
         }
 
+        public string SolvePart1_Str()
+        {
+            throw new NotImplementedException();
+        }
+
         public int SolvePart2()
         {
             var md5 = MD5.Create();
@@ -46,6 +51,11 @@ namespace AdventOfCode._2015
             }
 
             return -1;
+        }
+
+        public string SolvePart2_Str()
+        {
+            throw new NotImplementedException();
         }
     }
 }

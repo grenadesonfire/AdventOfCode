@@ -29,6 +29,11 @@ namespace AdventOfCode._2015
             return ret;
         }
 
+        public string SolvePart1_Str()
+        {
+            throw new NotImplementedException();
+        }
+
         public int SolvePart2()
         {
             var ret = 0;
@@ -43,6 +48,11 @@ namespace AdventOfCode._2015
                 if (ret < 0) return pIdx;
             }
             return -1;
+        }
+
+        public string SolvePart2_Str()
+        {
+            throw new NotImplementedException();
         }
     }
 }

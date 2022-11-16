@@ -39,6 +39,16 @@ namespace AdventOfCode._2015
             return vm.Execute("a");
         }
 
+        public string SolvePart1_Str()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string SolvePart2_Str()
+        {
+            throw new NotImplementedException();
+        }
+
         private class LogicMachine
         {
             private List<Instruction> _instructions;

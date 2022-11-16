@@ -90,6 +90,14 @@ namespace AdventOfCode._2015
                 c == 'u') >= 3;
         }
 
+        public string SolvePart1_Str()
+        {
+            throw new NotImplementedException();
+        }
 
+        public string SolvePart2_Str()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
