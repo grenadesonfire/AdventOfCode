@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AdventOfCode.Core;
 
 namespace AdventOfCode._2015
 {
@@ -21,14 +22,14 @@ namespace AdventOfCode._2015
             _commands = commands.Select(c => new LightCommand(c)).ToList(); ;
         }
 
-        public int SolvePart1()
+        public long SolvePart1()
         {
             var grid = new LightGrid(_commands);
             grid.RunCommands();
             return grid.On;
         }
 
-        public int SolvePart2()
+        public long SolvePart2()
         {
             var grid = new LightGridV2(_commands);
             grid.RunCommands();
@@ -45,7 +46,7 @@ namespace AdventOfCode._2015
             throw new NotImplementedException();
         }
 
-        private class LightGridV2 
+        private class LightGridV2
         {
             private List<LightCommand> _commands;
             private int[,] _grid;
@@ -75,14 +76,14 @@ namespace AdventOfCode._2015
                         {
                             case LightCommandInst.OFF:
                                 if (_grid[yIdx, xIdx] > 0) Brightness--;
-                                _grid[yIdx, xIdx] = Math.Max(0, _grid[yIdx, xIdx]-1);
+                                _grid[yIdx, xIdx] = Math.Max(0, _grid[yIdx, xIdx] - 1);
                                 break;
                             case LightCommandInst.ON:
                                 Brightness += 1;
                                 _grid[yIdx, xIdx]++;
                                 break;
                             case LightCommandInst.TOGGLE:
-                                _grid[yIdx, xIdx]+=2;
+                                _grid[yIdx, xIdx] += 2;
                                 Brightness += 2;
                                 break;
                         }
@@ -105,7 +106,7 @@ namespace AdventOfCode._2015
 
             public void RunCommands()
             {
-                foreach(var cmd in _commands)
+                foreach (var cmd in _commands)
                 {
                     Execute(cmd);
                 }
@@ -113,9 +114,9 @@ namespace AdventOfCode._2015
 
             private void Execute(LightCommand cmd)
             {
-                for(var yIdx = cmd.Top.Y; yIdx <= cmd.Bottom.Y; yIdx++)
+                for (var yIdx = cmd.Top.Y; yIdx <= cmd.Bottom.Y; yIdx++)
                 {
-                    for(var xIdx = cmd.Top.X;xIdx<=cmd.Bottom.X;xIdx++)
+                    for (var xIdx = cmd.Top.X; xIdx <= cmd.Bottom.X; xIdx++)
                     {
                         switch (cmd.Instruction)
                         {

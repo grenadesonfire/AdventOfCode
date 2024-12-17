@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AdventOfCode.Core;
 
 namespace AdventOfCode._2015
 {
@@ -12,7 +13,7 @@ namespace AdventOfCode._2015
 
         public DayEight(string[] input) => strs = input;
 
-        public int SolvePart1()
+        public long SolvePart1()
         {
             //return strs.Sum(s => s.Length);
             return strs.Sum(s => s.Length) - strs.Sum(s => CountOutput(s));
@@ -22,7 +23,7 @@ namespace AdventOfCode._2015
         {
             var ret = 0;
 
-            for(var sIdx = 1; sIdx < s.Length-1; sIdx++)
+            for (var sIdx = 1; sIdx < s.Length - 1; sIdx++)
             {
                 if (s[sIdx] == '\\' && (s[sIdx + 1] == '"' || s[sIdx + 1] == '\\')) sIdx++;
                 else if (s[sIdx] == '\\' && s[sIdx + 1] == 'x') sIdx += 3;
@@ -46,7 +47,7 @@ namespace AdventOfCode._2015
             return ret + 2;
         }
 
-        public int SolvePart2()
+        public long SolvePart2()
         {
             return strs.Sum(s => SuperCountOutput(s)) - strs.Sum(s => s.Length);
         }

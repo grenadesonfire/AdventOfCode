@@ -4,25 +4,26 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using AdventOfCode.Core;
 
 namespace AdventOfCode._2015
 {
     public class DayFour : ISolveable
     {
         private string _key;
-        
+
         public DayFour(string input)
         {
             _key = input;
         }
 
-        public int SolvePart1()
+        public long SolvePart1()
         {
             var md5 = MD5.Create();
 
-            for(var attempt = 0; attempt < 1000 * 1000 * 1; attempt++)
+            for (var attempt = 0; attempt < 1000 * 1000 * 1; attempt++)
             {
-                var bytes = System.Text.Encoding.ASCII.GetBytes(_key+$"{attempt}");
+                var bytes = System.Text.Encoding.ASCII.GetBytes(_key + $"{attempt}");
                 var hashed = md5.ComputeHash(bytes);
                 var output = Convert.ToHexString(hashed);
 
@@ -37,7 +38,7 @@ namespace AdventOfCode._2015
             throw new NotImplementedException();
         }
 
-        public int SolvePart2()
+        public long SolvePart2()
         {
             var md5 = MD5.Create();
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AdventOfCode.Core;
 
 namespace AdventOfCode._2015
 {
@@ -14,7 +15,7 @@ namespace AdventOfCode._2015
             _dirs = new Directions(map);
         }
 
-        public int SolvePart1()
+        public long SolvePart1()
         {
             _dirs.Navigate();
             return _dirs.UniqueHouses;
@@ -25,7 +26,7 @@ namespace AdventOfCode._2015
             throw new NotImplementedException();
         }
 
-        public int SolvePart2()
+        public long SolvePart2()
         {
             _dirs.SplitNavigate();
             return _dirs.UniqueHouses;
@@ -54,7 +55,7 @@ namespace AdventOfCode._2015
             public void Navigate()
             {
                 var currentHouse = Init();
-                for(var idx=0;idx<_path.Length;idx++)
+                for (var idx = 0; idx < _path.Length; idx++)
                 {
                     currentHouse = DecideMove(currentHouse, _path[idx]);
                 }
@@ -66,7 +67,7 @@ namespace AdventOfCode._2015
 
                 System.Diagnostics.Debugger.Launch();
 
-                for(var idx=0;idx<_path.Length;idx+=2)
+                for (var idx = 0; idx < _path.Length; idx += 2)
                 {
                     currentHouse = DecideMove(currentHouse, _path[idx]);
                     if (idx + 1 < _path.Length) roboHouse = DecideMove(roboHouse, _path[idx + 1]);
@@ -126,5 +127,5 @@ namespace AdventOfCode._2015
         }
     }
 
-    
+
 }

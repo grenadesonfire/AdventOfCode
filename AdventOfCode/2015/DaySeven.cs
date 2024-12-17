@@ -4,13 +4,14 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using AdventOfCode.Core;
 
 namespace AdventOfCode._2015
 {
     public class DaySeven : ISolveable
     {
         private List<Instruction> _instructions;
-        
+
         public DaySeven(string[] lines)
         {
             _instructions = lines.Select(s => new Instruction(s)).ToList();
@@ -22,14 +23,14 @@ namespace AdventOfCode._2015
             return vm.Execute(label);
         }
 
-        public int SolvePart1()
+        public long SolvePart1()
         {
-            
+
             var vm = new LogicMachine(_instructions);
             return vm.Execute("a");
         }
 
-        public int SolvePart2()
+        public long SolvePart2()
         {
             var vm = new LogicMachine(_instructions);
             var rest = vm.Execute("a");
@@ -85,10 +86,10 @@ namespace AdventOfCode._2015
                             throw new NotImplementedException("There is nothing to handle that method.");
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     System.Diagnostics.Debugger.Launch();
-                    throw ex;
+                    throw;
                 }
             }
 
@@ -147,13 +148,13 @@ namespace AdventOfCode._2015
                 var terms = halves[0].Split(" ", StringSplitOptions.RemoveEmptyEntries);
 
                 // Assignment
-                if(terms.Length == 1)
+                if (terms.Length == 1)
                 {
                     Type = InstructionType.Assignment;
                     Arg1 = terms[0];
                 }
                 // Not
-                else if(terms.Length == 2)
+                else if (terms.Length == 2)
                 {
                     Type = InstructionType.Not;
                     Arg1 = terms[1];
@@ -162,7 +163,7 @@ namespace AdventOfCode._2015
                 {
                     switch (terms[1])
                     {
-                        case "AND": Type = InstructionType.And;break;
+                        case "AND": Type = InstructionType.And; break;
                         case "OR": Type = InstructionType.Or; break;
                         case "LSHIFT": Type = InstructionType.Lshift; break;
                         case "RSHIFT": Type = InstructionType.Rshift; break;

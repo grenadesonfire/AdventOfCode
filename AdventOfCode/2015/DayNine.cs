@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AdventOfCode.Core;
 
 namespace AdventOfCode._2015
 {
@@ -19,12 +20,12 @@ namespace AdventOfCode._2015
             _locations = _locations.Distinct().ToList();
         }
 
-        public int SolvePart1()
+        public long SolvePart1()
         {
             return StartDFS_Min();
         }
 
-        public int SolvePart2()
+        public long SolvePart2()
         {
             return StartDFS_Max();
         }
@@ -78,7 +79,7 @@ namespace AdventOfCode._2015
         {
             var min = int.MaxValue;
 
-            foreach(var place in _locations)
+            foreach (var place in _locations)
             {
                 var visited = new List<string> { place };
 
@@ -99,7 +100,7 @@ namespace AdventOfCode._2015
             var min = int.MaxValue;
             var best = string.Empty;
 
-            foreach(var place in left)
+            foreach (var place in left)
             {
                 //Create the new list so we don't mess up other branches
                 // could also use a queue or stack but ehhh.
@@ -108,7 +109,7 @@ namespace AdventOfCode._2015
 
                 var dist = LookupDistance(currentlyAt, place) + DFS_Min(newVisit, place);
 
-                if(dist < min)
+                if (dist < min)
                 {
                     min = dist;
                     best = place;

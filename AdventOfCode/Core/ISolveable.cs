@@ -1,10 +1,10 @@
-﻿namespace AdventOfCode
+﻿namespace AdventOfCode.Core
 {
     public interface ISolveable
     {
-        int SolvePart1();
+        long SolvePart1();
         string SolvePart1_Str();
-        int SolvePart2();
+        long SolvePart2();
         string SolvePart2_Str();
     }
 }

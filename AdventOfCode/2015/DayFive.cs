@@ -4,6 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AdventOfCode.Core;
 
 namespace AdventOfCode._2015
 {
@@ -16,12 +17,12 @@ namespace AdventOfCode._2015
             _possibleNiceStrings = niceStringCandidates;
         }
 
-        public int SolvePart1()
+        public long SolvePart1()
         {
             return _possibleNiceStrings.Count(s => PassesTripleTests(s));
         }
 
-        public int SolvePart2()
+        public long SolvePart2()
         {
             return _possibleNiceStrings.Count(s => PassesDoubleTests(s));
         }
@@ -41,7 +42,7 @@ namespace AdventOfCode._2015
 
         private bool Has3SplitPair(string s)
         {
-            for(var sIdx = 0; sIdx < s.Length - 2; sIdx++)
+            for (var sIdx = 0; sIdx < s.Length - 2; sIdx++)
             {
                 if (s[sIdx] == s[sIdx + 2]) return true;
             }
@@ -50,7 +51,7 @@ namespace AdventOfCode._2015
 
         private bool HasDouble2Grams(string s)
         {
-            for(var sIdx = 0; sIdx < s.Length - 1; sIdx++)
+            for (var sIdx = 0; sIdx < s.Length - 1; sIdx++)
             {
                 var digram = s.Substring(sIdx, 2);
                 if (s.Length - sIdx >= 2 &&
@@ -62,7 +63,7 @@ namespace AdventOfCode._2015
 
         private bool HasNoneOf(string s, string[] evil)
         {
-            foreach(var e in evil)
+            foreach (var e in evil)
             {
                 if (s.Contains(e)) return false;
             }
@@ -72,7 +73,7 @@ namespace AdventOfCode._2015
         private bool HasDoubleLetter(string s)
         {
             var lastLetter = s[0];
-            for(var cIdx = 1; cIdx < s.Length; cIdx++)
+            for (var cIdx = 1; cIdx < s.Length; cIdx++)
             {
                 if (lastLetter == s[cIdx]) return true;
                 lastLetter = s[cIdx];

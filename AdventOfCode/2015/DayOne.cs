@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AdventOfCode.Core;
 
 namespace AdventOfCode._2015
 {
@@ -15,15 +16,15 @@ namespace AdventOfCode._2015
             _input = input;
         }
 
-        public int SolvePart1()
+        public long SolvePart1()
         {
             var ret = 0;
-            for(var pIdx = 0; pIdx < _input.Length; pIdx++)
+            for (var pIdx = 0; pIdx < _input.Length; pIdx++)
             {
                 switch (_input[pIdx])
                 {
-                    case '(': ret++;break;
-                    case ')': ret--;break;
+                    case '(': ret++; break;
+                    case ')': ret--; break;
                 }
             }
             return ret;
@@ -34,7 +35,7 @@ namespace AdventOfCode._2015
             throw new NotImplementedException();
         }
 
-        public int SolvePart2()
+        public long SolvePart2()
         {
             var ret = 0;
             for (var pIdx = 0; pIdx < _input.Length; pIdx++)

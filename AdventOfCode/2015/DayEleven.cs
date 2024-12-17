@@ -4,6 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AdventOfCode.Core;
 
 namespace AdventOfCode._2015
 {
@@ -15,7 +16,7 @@ namespace AdventOfCode._2015
         {
             _pwd = new SantaPassword(pwd);
         }
-        public int SolvePart1()
+        public long SolvePart1()
         {
             throw new NotImplementedException();
         }
@@ -26,7 +27,7 @@ namespace AdventOfCode._2015
             return _pwd.ToString();
         }
 
-        public int SolvePart2()
+        public long SolvePart2()
         {
             return 0;
         }
@@ -73,7 +74,7 @@ namespace AdventOfCode._2015
             private bool Contains2Doubles()
             {
                 var firstPassed = false;
-                for(var idx = 0; idx < Converted.Count-1; idx++)
+                for (var idx = 0; idx < Converted.Count - 1; idx++)
                 {
                     if (Converted[idx] == Converted[idx + 1])
                     {
@@ -87,16 +88,16 @@ namespace AdventOfCode._2015
 
             private bool DoesNotContain(char[] strings)
             {
-                foreach(var test in strings)
+                foreach (var test in strings)
                 {
-                    if (Converted.Contains((int)(test-'a'))) return false;
+                    if (Converted.Contains((int)(test - 'a'))) return false;
                 }
                 return true;
             }
 
             private bool Increasing()
             {
-                for(var idx=0;idx<Converted.Count-2;idx++)
+                for (var idx = 0; idx < Converted.Count - 2; idx++)
                 {
                     if (Converted[idx] + 1 == Converted[idx + 1] &&
                         Converted[idx] + 2 == Converted[idx + 2])
@@ -115,8 +116,8 @@ namespace AdventOfCode._2015
 
             internal void Increment()
             {
-                Converted[Converted.Count-1]++;
-                for (var idx = Converted.Count-1; idx > 0; idx--)
+                Converted[Converted.Count - 1]++;
+                for (var idx = Converted.Count - 1; idx > 0; idx--)
                 {
                     if (Converted[idx] >= 26)
                     {

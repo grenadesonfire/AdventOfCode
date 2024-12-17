@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AdventOfCode.Core;
 
 namespace AdventOfCode._2015
 {
@@ -15,7 +16,7 @@ namespace AdventOfCode._2015
             _presents.AddRange(inputs.Select(inp => new Present(inp)));
         }
 
-        public int SolvePart1()
+        public long SolvePart1()
         {
             return _presents.Sum(p => p.PaperNeeded());
         }
@@ -25,7 +26,7 @@ namespace AdventOfCode._2015
             throw new NotImplementedException();
         }
 
-        public int SolvePart2()
+        public long SolvePart2()
         {
             return _presents.Sum(p => p.RibbonNeeded());
         }
