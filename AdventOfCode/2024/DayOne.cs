@@ -7,13 +7,15 @@ namespace AdventOfCode._2024
         private List<int> _list1 = new List<int>();
         private List<int> _list2 = new List<int>();
 
-        public DayOne(int mode){
+        public DayOne(int mode)
+        {
             string[] lines;
 
-            if(mode == 0) lines = File.ReadAllLines(@"C:\Git\AdventOfCode\Input\2024\Day1_0");
+            if (mode == 0) lines = File.ReadAllLines(@"C:\Git\AdventOfCode\Input\2024\Day1_0");
             else lines = File.ReadAllLines(@"C:\Git\AdventOfCode\Input\2024\Day1_1");
 
-            foreach(var line in lines) {
+            foreach (var line in lines)
+            {
                 var split = line.Split(" ", StringSplitOptions.RemoveEmptyEntries);
                 _list1.Add(int.Parse(split[0]));
                 _list2.Add(int.Parse(split[1]));
@@ -26,7 +28,8 @@ namespace AdventOfCode._2024
             _list1.Sort();
             _list2.Sort();
 
-            for(int idx=0;idx<_list1.Count;idx++) {
+            for (int idx = 0; idx < _list1.Count; idx++)
+            {
                 sum += Math.Abs(_list1[idx] - _list2[idx]);
             }
 
@@ -42,7 +45,7 @@ namespace AdventOfCode._2024
         {
             var sum = 0l;
 
-            foreach(var item in _list1)
+            foreach (var item in _list1)
             {
                 sum += _list2.Count(_l => item == _l) * item;
             }

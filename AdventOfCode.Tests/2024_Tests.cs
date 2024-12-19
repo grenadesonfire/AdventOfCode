@@ -1,6 +1,6 @@
 namespace AdventOfCode.Tests
 {
-    public class Tests_2024
+    public class Tests_2024_DayOne
     {
         [Fact]
         public void DayOneGiven_Part1()
@@ -32,6 +32,78 @@ namespace AdventOfCode.Tests
             var day = new _2024.DayOne(1);
 
             Assert.Equal(0, day.SolvePart2());
+        }
+    }
+
+    public class Tests_2024_DayTwo
+    {
+        [Fact]
+        public void DayTwoGiven_Part1()
+        {
+            var day = new _2024.DayTwo(0);
+
+            Assert.Equal(2, day.SolvePart1());
+        }
+
+        [Fact]
+        public void DayTwoInput_Part1()
+        {
+            var day = new _2024.DayTwo(1);
+
+            var output = day.SolvePart1_Str();
+
+            Assert.Equal(252, day.SolvePart1());
+        }
+
+        [Fact]
+        public void DayTwoGiven_Part2()
+        {
+            var day = new _2024.DayTwo(0);
+
+            Assert.Equal(4, day.SolvePart2());
+        }
+
+        [Fact]
+        public void DayTwoInput_Part2()
+        {
+            var day = new _2024.DayTwo(1);
+
+            Assert.Equal(324, day.SolvePart2());
+        }
+    }
+
+    public class Tests_2024_DayThree
+    {
+        [Fact]
+        public void DayThreeGiven_Part1()
+        {
+            var day = new _2024.DayThree(0);
+
+            Assert.Equal(161, day.SolvePart1());
+        }
+
+        [Fact]
+        public void DayThreeInput_Part1()
+        {
+            var day = new _2024.DayThree(1);
+
+            Assert.Equal(175615763, day.SolvePart1());
+        }
+
+        [Fact]
+        public void DayThreeGiven_Part2()
+        {
+            var day = new _2024.DayThree(2);
+
+            Assert.Equal(48, day.SolvePart2());
+        }
+
+        [Fact]
+        public void DayThreeInput_Part2()
+        {
+            var day = new _2024.DayThree(1);
+
+            Assert.Equal(175615763, day.SolvePart2());
         }
     }
 }
