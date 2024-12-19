@@ -11,22 +11,23 @@ namespace AdventOfCode._2024
             return IsSafe(Items.ToArray(), min, max);
         }
 
-        internal bool IsSafe(int[] reportItems,int min, int max)
+        internal bool IsSafe(int[] reportItems, int min, int max)
         {
             // Technically I could use one but also this is more obvious
             var isIncreasing = reportItems[0] < reportItems[1];
             var isDecreasing = reportItems[0] > reportItems[1];
-            var diff = Math.Abs(reportItems[0]-reportItems[1]);
-            if(diff < min || diff > max) return false;
+            var diff = Math.Abs(reportItems[0] - reportItems[1]);
+            if (diff < min || diff > max) return false;
 
-            if(!isIncreasing && !isDecreasing) return false;
+            if (!isIncreasing && !isDecreasing) return false;
 
-            for(int idx=1;idx<reportItems.Length-1;idx++) {
-                if(isIncreasing && reportItems[idx] > reportItems[idx+1]) return false;
-                if(isDecreasing && reportItems[idx] < reportItems[idx+1]) return false;
+            for (int idx = 1; idx < reportItems.Length - 1; idx++)
+            {
+                if (isIncreasing && reportItems[idx] > reportItems[idx + 1]) return false;
+                if (isDecreasing && reportItems[idx] < reportItems[idx + 1]) return false;
 
-                diff = Math.Abs(reportItems[idx]-reportItems[idx+1]);
-                if(diff < min || diff > max) return false;
+                diff = Math.Abs(reportItems[idx] - reportItems[idx + 1]);
+                if (diff < min || diff > max) return false;
             }
 
             return true;
@@ -40,20 +41,22 @@ namespace AdventOfCode._2024
         /// <returns></returns>
         internal bool IsReallySafe(int min, int max)
         {
-            if(IsSafe(Items.ToArray(), min, max)) return true;
+            if (IsSafe(Items.ToArray(), min, max)) return true;
 
             var maxItems = Items.Count();
 
-            for(var idx=0;idx<maxItems;idx++){
+            for (var idx = 0; idx < maxItems; idx++)
+            {
                 var testArr = new List<int>();
-                
-                if(idx == 0 && IsSafe(Items.Skip(1).ToArray(), min, max)) 
-                    return true;
-                else {
-                    var subItems = Items.Take(idx).ToList();
-                    subItems.AddRange(Items.Skip(idx+1).ToList());
 
-                    if(IsSafe(subItems.ToArray(), min, max)) return true;
+                if (idx == 0 && IsSafe(Items.Skip(1).ToArray(), min, max))
+                    return true;
+                else
+                {
+                    var subItems = Items.Take(idx).ToList();
+                    subItems.AddRange(Items.Skip(idx + 1).ToList());
+
+                    if (IsSafe(subItems.ToArray(), min, max)) return true;
                 }
             }
 
@@ -95,7 +98,7 @@ namespace AdventOfCode._2024
                         .Split(" ", StringSplitOptions.RemoveEmptyEntries)
                         .Select(s => int.Parse(s))
                         .ToList();
-                
+
                 reports.Add(report);
             }
 
@@ -106,9 +109,9 @@ namespace AdventOfCode._2024
         {
             var sum = 0;
 
-            foreach(var report in Reports)
+            foreach (var report in Reports)
             {
-                if(report.IsSafe(1,3)) sum++;
+                if (report.IsSafe(1, 3)) sum++;
             }
 
             return sum;
@@ -116,16 +119,16 @@ namespace AdventOfCode._2024
 
         public string SolvePart1_Str()
         {
-            return string.Join("\n", Reports.Where(r => r.IsSafe(1,3)).Select(r => string.Join(" ", r.Items)));
+            return string.Join("\n", Reports.Where(r => r.IsSafe(1, 3)).Select(r => string.Join(" ", r.Items)));
         }
 
         public long SolvePart2()
         {
             var sum = 0;
 
-            foreach(var report in Reports)
+            foreach (var report in Reports)
             {
-                if(report.IsReallySafe(1,3)) sum++;
+                if (report.IsReallySafe(1, 3)) sum++;
             }
 
             return sum;

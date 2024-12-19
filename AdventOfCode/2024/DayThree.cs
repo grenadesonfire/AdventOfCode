@@ -11,13 +11,16 @@ namespace AdventOfCode._2024
 
         public DayThree(int mode)
         {
-            if(mode==0){
+            if (mode == 0)
+            {
                 _input = AdventFileReader.GetInput(AdventFileReader.DEFAULT_DIR, "Day3_0");
             }
-            else if(mode==2){
+            else if (mode == 2)
+            {
                 _input = AdventFileReader.GetInput(AdventFileReader.DEFAULT_DIR, "Day3_0_1");
             }
-            else {
+            else
+            {
                 _input = AdventFileReader.GetInput(AdventFileReader.DEFAULT_DIR, "Day3_1");
             }
         }
@@ -26,12 +29,14 @@ namespace AdventOfCode._2024
         {
             var regex = new Regex(regexMatcher);
             var allMatches = new List<string>();
-            foreach(var line in _input) {
+            foreach (var line in _input)
+            {
                 allMatches.AddRange(regex.Matches(line).Select(m => m.Value));
             }
 
             var sum = 0l;
-            foreach(var line in allMatches){
+            foreach (var line in allMatches)
+            {
                 sum += Solve(line);
             }
 
@@ -41,7 +46,7 @@ namespace AdventOfCode._2024
         private long Solve(string line)
         {
             var nums = line.Split(
-                new List<string>(){"mul(",",",")"}.ToArray(), 
+                new List<string>() { "mul(", ",", ")" }.ToArray(),
                 StringSplitOptions.RemoveEmptyEntries);
             return int.Parse(nums[0]) * int.Parse(nums[1]);
         }
@@ -55,18 +60,22 @@ namespace AdventOfCode._2024
         {
             var regex = new Regex(exRegMatcher);
             var allMatches = new List<string>();
-            foreach(var line in _input) {
+            foreach (var line in _input)
+            {
                 allMatches.AddRange(regex.Matches(line).Select(m => m.Value));
             }
 
             var sum = 0l;
             var countNext = true;
-            foreach(var line in allMatches){
-                switch(line){
+            foreach (var line in allMatches)
+            {
+                switch (line)
+                {
                     case "do()": countNext = true; break;
                     case "don't()": countNext = false; break;
                     default:
-                        if(countNext){
+                        if (countNext)
+                        {
                             sum += Solve(line);
                         }
                         break;

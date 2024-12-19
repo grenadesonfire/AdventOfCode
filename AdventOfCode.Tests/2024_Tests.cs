@@ -128,13 +128,17 @@ namespace AdventOfCode.Tests
         [Fact]
         public void Given_Part2()
         {
+            var day = new _2024.DayFour(0);
 
+            Assert.Equal(9, day.SolvePart2());
         }
 
         [Fact]
         public void Input_Part2()
         {
+            var day = new _2024.DayFour(1);
 
+            Assert.Equal(1877, day.SolvePart2());
         }
     }
 }

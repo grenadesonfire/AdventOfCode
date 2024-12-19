@@ -24,7 +24,7 @@ namespace AdventOfCode._2024
 
         public long SolvePart1()
         {
-            var sum = 0l;
+            var sum = 0L;
             _list1.Sort();
             _list2.Sort();
 
@@ -43,7 +43,7 @@ namespace AdventOfCode._2024
 
         public long SolvePart2()
         {
-            var sum = 0l;
+            var sum = 0L;
 
             foreach (var item in _list1)
             {
