@@ -103,7 +103,38 @@ namespace AdventOfCode.Tests
         {
             var day = new _2024.DayThree(1);
 
-            Assert.Equal(175615763, day.SolvePart2());
+            Assert.Equal(74361272, day.SolvePart2());
+        }
+    }
+
+    public class Tests_2024_DayFour
+    {
+        [Fact]
+        public void Given_Part1()
+        {
+            var day = new _2024.DayFour(0);
+
+            Assert.Equal(18, day.SolvePart1());
+        }
+
+        [Fact]
+        public void Input_Part1()
+        {
+            var day = new _2024.DayFour(1);
+
+            Assert.Equal(2462, day.SolvePart1());
+        }
+
+        [Fact]
+        public void Given_Part2()
+        {
+
+        }
+
+        [Fact]
+        public void Input_Part2()
+        {
+
         }
     }
 }
